@@ -1,0 +1,22 @@
+import numpy as np
+import imageio.v3 as image
+
+paths = {
+    "kenikir": "C:\\Users\\indah\\OneDrive\\Documents\\PCD\\daun_kenikir.jpeg",
+    "singkong": "C:\\Users\\indah\\OneDrive\\Documents\\PCD\\daun_singkong.jpeg",
+    "pepaya": "C:\\Users\\indah\\OneDrive\\Documents\\PCD\\daun_pepaya.jpeg"
+}
+
+for name, path in paths.items():
+    
+    image_source = image.imread(path)
+    red_ch = image_source[:,:,0]
+    
+   
+    image_red = np.zeros_like(image_source)
+    image_red[:,:,0] = red_ch
+    
+    output_path = f"C:\\Users\\indah\\OneDrive\\Documents\\PCD\\hasil{name}_red_channel.jpeg"
+    image.imwrite(output_path, image_red)
+    
+    print(f"Gambar Channel Merah untuk {name} selesai disimpan di {output_path}")

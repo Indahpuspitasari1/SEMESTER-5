@@ -1,0 +1,20 @@
+import numpy as np
+import imageio.v3 as image
+
+paths = {
+    "kenikir": "C:\\Users\\indah\\OneDrive\\Documents\\PCD\\daun_kenikir.jpeg",
+    "singkong": "C:\\Users\\indah\\OneDrive\\Documents\\PCD\\daun_singkong.jpeg",
+    "pepaya": "C:\\Users\\indah\\OneDrive\\Documents\\PCD\\daun_pepaya.jpeg"
+}
+
+for name, path in paths.items():
+    
+    image_source = image.imread(path)
+    grayscale_image = np.dot(image_source[...,:3], [0.299, 0.587, 0.114]).astype(np.uint8)
+    
+   
+    threshold_image = np.where(grayscale_image > 128, 255, 0).astype(np.uint8)
+    output_path = f"C:\\Users\\indah\\OneDrive\\Documents\\PCD\\hasil{name}_treshold.jpeg"
+    image.imwrite(output_path, threshold_image)
+    
+    print(f"Gambar Threshold (Biner) untuk {name} selesai disimpan di {output_path}")
